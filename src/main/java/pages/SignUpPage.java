@@ -9,12 +9,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
+
 public class SignUpPage extends BasePage{
     public SignUpPage(WebDriver driver){
         setDriver(driver);
         PageFactory.initElements(
                 new AjaxElementLocatorFactory(driver, 10), this);
     }
+
 
     @FindBy(id = "name")
     WebElement inputName;
@@ -26,6 +28,11 @@ public class SignUpPage extends BasePage{
     WebElement inputPassword;
     @FindBy(xpath = "//label[@for='terms-of-use']")
     WebElement checkBoxIAgree;
+    @FindBy(css = "button[type='submit']")
+    WebElement btnYalla;
+    @FindBy(xpath = "//mat-dialog-container//h2")
+    WebElement textDialogContainer;
+
 
 
 
@@ -41,11 +48,21 @@ public class SignUpPage extends BasePage{
     }
 
     public void clickCheckBoxWithActions(){
-        Actions actions = new Actions(driver);
-        actions.moveToElement(checkBoxIAgree, -50, 0).click().perform();
 
-        //checkBoxIAgree.getSize().getHeight()
-        //checkBoxIAgree.getSize().getWidth()
+       int y = checkBoxIAgree.getSize().getHeight();
+       int x =  checkBoxIAgree.getSize().getWidth();
+        System.out.println(x+"X"+y);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(checkBoxIAgree, -(x/10*4), -(y/4)).click().perform();
     }
+
+    public void clickBtnYalla(){
+        btnYalla.click();
+    }
+
+    public boolean isTextDialogContainerPresent(){
+        return elementIsDisplayed(textDialogContainer);
+    }
+
 
 }
