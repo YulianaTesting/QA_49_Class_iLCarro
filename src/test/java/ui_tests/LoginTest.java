@@ -22,6 +22,7 @@ public class LoginTest extends ApplicationManager {
         new HomePage(getDriver()).clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
+        logger.error("Example error");
         Assert.assertTrue(loginPage.isLoggedDisplayed());
     }
 

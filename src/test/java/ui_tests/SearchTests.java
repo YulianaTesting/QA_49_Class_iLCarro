@@ -69,4 +69,15 @@ public class SearchTests extends ApplicationManager {
         homePage.typeSearchFormWOJS(city, dateFrom, dateTo);
         Assert.assertTrue(homePage.isTextInErrorPresent("Second date must be after first date"));
     }
+    //-------------------------------//
+
+    @Test
+    public void searchPositiveTestCalendar(){
+        String city = "Haifa";
+        LocalDate dateFrom = LocalDate.of(2025, 12, 1);
+        LocalDate dateTo = LocalDate.of(2025, 12, 22);
+        homePage.typeSearchFormCalendar(city,dateFrom,dateTo);
+        Assert.assertTrue(homePage.isTextInErrorPresent("City is required"));
+
+    }
 }
