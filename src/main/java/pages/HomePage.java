@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -85,10 +83,15 @@ public class HomePage extends BasePage {
     WebElement calendarBtnYear;
 
 
+    private static String monthCreate(String month){
+        StringBuilder result = new StringBuilder();
+        return result.append(month.substring(0, 1).toUpperCase())
+                .append(month.substring(1).toLowerCase()).toString();
+    }
+
+
 
     private void typeCalendar(LocalDate date) {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         calendarBtnYear.click();
         String year = Integer.toString(date.getYear());  //2025   2026
@@ -98,17 +101,16 @@ public class HomePage extends BasePage {
 
         //   //td[@aria-label="December 2025"]
         String month = date.getMonth().toString();
-        System.out.println(month);  // DECEMBER  -- > December
-        month = month.toLowerCase();
-        String first = month.substring(0, 1).toUpperCase();
-        month = month.replace(month.substring(0, 1), first);
-        System.out.println(month);
+        month = monthCreate(month);
         WebElement btnMonth = driver.findElement(By.xpath("//td[@aria-label='" + month + " " + year + "']"));
         btnMonth.click();
+
         String day = String.valueOf(date.getDayOfMonth());
-        WebElement btnDay = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//div[contains(@class,'mat-calendar-body-cell-content') and normalize-space(text())='" + day + "']")));
+        WebElement btnDay = driver.findElement(By.xpath("//div[text()=' "+ day +" ']/.."));
         btnDay.click();
+
+
+
 
     }
 

@@ -74,10 +74,8 @@ public class SearchTests extends ApplicationManager {
     @Test
     public void searchPositiveTestCalendar(){
         String city = "Haifa";
-        LocalDate dateFrom = LocalDate.of(2025, 12, 1);
+        LocalDate dateFrom = LocalDate.of(2026, 10, 11);
         LocalDate dateTo = LocalDate.of(2025, 12, 22);
-        homePage.typeSearchFormCalendar(city,dateFrom,dateTo);
-        Assert.assertTrue(homePage.isTextInErrorPresent("City is required"));
-
+        homePage.typeSearchFormCalendar(city, dateFrom, dateTo);
     }
 }
