@@ -2,12 +2,14 @@ package ui_tests;
 
 import dto.User;
 import manager.ApplicationManager;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.RetryAnalyzer;
+import utils.TakeScreenShot;
 import utils.TestNGListener;
 
 
@@ -29,6 +31,7 @@ public class LoginTest extends ApplicationManager {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
         logger.error("Example error");
+        TakeScreenShot.takeScreenShot((TakesScreenshot)getDriver());
         Assert.assertTrue(loginPage.isLoggedDisplayed());
     }
 
