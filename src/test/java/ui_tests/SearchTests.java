@@ -3,10 +3,13 @@ package ui_tests;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
 
+
 import java.time.LocalDate;
+
 
 public class SearchTests extends ApplicationManager {
 
@@ -74,8 +77,9 @@ public class SearchTests extends ApplicationManager {
     @Test
     public void searchPositiveTestCalendar(){
         String city = "Haifa";
-        LocalDate dateFrom = LocalDate.of(2026, 10, 11);
-        LocalDate dateTo = LocalDate.of(2025, 12, 22);
+        LocalDate dateFrom = LocalDate.of(2025, 11, 15);
+        LocalDate dateTo = LocalDate.of(2026, 5, 22);
         homePage.typeSearchFormCalendar(city, dateFrom, dateTo);
+        Assert.assertTrue(homePage.urlContains("results", 5));
     }
 }

@@ -91,7 +91,7 @@ public class HomePage extends BasePage {
 
 
 
-    private void typeCalendar(LocalDate date) {
+    /*private void typeCalendar(LocalDate date) {
 
         calendarBtnYear.click();
         String year = Integer.toString(date.getYear());  //2025   2026
@@ -106,21 +106,53 @@ public class HomePage extends BasePage {
         btnMonth.click();
 
         String day = String.valueOf(date.getDayOfMonth());
-        WebElement btnDay = driver.findElement(By.xpath("//div[text()=' "+ day +" ']/.."));
+        String day1 = month+" "+day+" , "+year;
+       // WebElement btnDay = driver.findElement(By.xpath("//div[text()=' "+ day +" ']/.."));
+        WebElement btnDay = driver.findElement(By.xpath("//td[@aria-label='October \" + day + \", 2026']"));
+
         btnDay.click();
 
+    }*/
 
-
-
+    private void typeCalendar(LocalDate date) {
+        calendarBtnYear.click();
+        String year = Integer.toString(date.getYear());  //2025   2026
+        WebElement btnYear = driver.findElement(By.xpath("//td[@aria-label='" + year + "']"));
+        //  "//td[@aria-label='"+year+"']" --> "//td[@aria-label='"   "2026"   "']" -->  //td[@aria-label='2026']
+        btnYear.click();
+        //   //td[@aria-label="December 2025"]
+        String month = date.getMonth().toString();
+        month = monthCreate(month);
+        WebElement btnMonth = driver.findElement(By.xpath("//td[@aria-label='" + month + " " + year + "']"));
+        btnMonth.click();
+        // //div[text()=' 1 ']
+        String day = String.valueOf(date.getDayOfMonth());
+        String date1 = month + " " + day + ", " + year;
+        System.out.println(date1);
+        WebElement btnDay = driver.findElement(
+                By.xpath("//td[@aria-label='" + date1 + "']"));
+        btnDay.click();
     }
 
 
-    public void typeSearchFormCalendar(String city, LocalDate dateFrom, LocalDate dateTo) {
+    /*public void typeSearchFormCalendar(String city, LocalDate dateFrom, LocalDate dateTo) {
         inputCity.sendKeys(city);
         inputDates.click();
         typeCalendar(dateFrom);
         typeCalendar(dateTo);
         clickWait(btnYalla, 3);
+    }*/
+
+    public void typeSearchFormCalendar(String city, LocalDate dateFrom, LocalDate dateTo) {
+        inputCity.sendKeys(city);
+        inputDates.click();
+        pause(5);
+        typeCalendar(dateFrom);
+        pause(3);
+        typeCalendar(dateTo);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector(\"button[type='submit']\").removeAttribute(\"disabled\")");
+        btnYalla.click();
     }
 }
 
