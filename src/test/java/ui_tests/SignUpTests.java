@@ -15,13 +15,13 @@ import static utils.UserFactory.positiveUser;
 public class SignUpTests extends ApplicationManager {
     SignUpPage signUpPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void gotoSignUpPage(){
         new HomePage(getDriver()).clickBtnHeaderSingUp();
         signUpPage = new SignUpPage(getDriver());
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void registrationPositiveTest(){
         User user = positiveUser();
         signUpPage.typeLoginForm(user);

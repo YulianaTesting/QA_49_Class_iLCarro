@@ -18,7 +18,13 @@ public abstract class BasePage {
     @Setter
     static WebDriver driver;
 
-    @FindBy(css ="div[class='error']")
+    @FindBy(xpath = "//mat-dialog-container//button")
+    WebElement btnOkPopUp;
+
+  // @FindBy(css ="div[class='error']")
+  // List<WebElement> listErrorElements;
+
+    @FindBy(xpath = "//div[contains(@class,'error')]")
     List<WebElement> listErrorElements;
 
     public boolean isTextInErrorPresent(String text){

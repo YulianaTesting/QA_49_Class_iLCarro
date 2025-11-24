@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 
 public class LoginTest extends ApplicationManager {
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(groups = "smoke") //(retryAnalyzer = RetryAnalyzer.class)
     public void loginPositiveTest(Method method){
         User user = User.builder()
                 .username("tony1256@gmail.com")
@@ -35,7 +35,7 @@ public class LoginTest extends ApplicationManager {
         Assert.assertTrue(loginPage.isLoggedDisplayed());
     }
 
-    @Test
+    @Test(groups = "negative")
     public void loginNegativeTest_wrongPassword(){
         User user = User.builder()
                 .username("tony1256@gmail.com")
@@ -47,7 +47,7 @@ public class LoginTest extends ApplicationManager {
         Assert.assertTrue(loginPage.isLoggedIncorrect());
     }
 
-    @Test
+    @Test(groups = "negative")
     public void loginNegativeTest_emptyPassword(){
         User user = User.builder()
                 .username("tony1256@gmail.com")

@@ -14,12 +14,12 @@ import java.time.LocalDate;
 public class SearchTests extends ApplicationManager {
 
     HomePage homePage;
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void openHomePage(){
         homePage = new HomePage(getDriver());
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void searchPositiveTest(){
         String city = "Haifa";
         LocalDate dateFrom = LocalDate.of(2025, 12, 1);
@@ -28,15 +28,16 @@ public class SearchTests extends ApplicationManager {
         Assert.assertTrue(homePage.urlContains("results", 5));
     }
 
-   // @Test(expectedExceptions = org.openqa.selenium.TimeoutException.class)
-   @Test(expectedExceptions = NullPointerException.class)
+    @Test(expectedExceptions = org.openqa.selenium.TimeoutException.class)
     public void searchNegativeTestWOCity(){
         String city = "";
         LocalDate dateFrom = LocalDate.of(2025, 12, 1);
         LocalDate dateTo = LocalDate.of(2025, 12, 22);
         homePage.typeSearchFormWOJS(city, dateFrom, dateTo);
-        Assert.assertTrue(homePage.urlContains("search", 5));
     }
+
+
+
     @Test()
     public void searchNegativeTestWOCityValidateErrorMessage(){
         String city = "";

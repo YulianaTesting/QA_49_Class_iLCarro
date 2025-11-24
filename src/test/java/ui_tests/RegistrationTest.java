@@ -17,7 +17,7 @@ public class RegistrationTest extends ApplicationManager {
 
     @Test
     public void RegistrationPositiveTest(){
-        User user = User.builder().firstName("Mark").lastName("Tomas").username("mark@gmail.com").password("Password54321!").build();
+        User user = User.builder().firstName("Mark").lastName("Tomas").username("magrk1234@gmail.com").password("Password54321!").build();
         new HomePage(getDriver()).clickBtnSingUpHeader();
         RegistrationPage registrationPage = new RegistrationPage(getDriver());
         registrationPage.typeRegistrationForm(user);

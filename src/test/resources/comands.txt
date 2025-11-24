@@ -1,0 +1,7 @@
+./gradlew clean smoketests
+./gradlew clean negative_tests
+./gradlew clean -Dsuite=negative_tests different_tests
+./gradlew clean different_tests -Dsuite=smoke_contact_tests
+./gradlew clean browser_tests -Pbrowser=edge
+./gradlew clean browser_tests -Pbrowser=safari
+./gradlew clean browser_tests -Pbrowser=chrome
